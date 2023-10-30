@@ -34,6 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.codetron.schoolattendanceapp.R
 
 @Composable
@@ -111,7 +112,11 @@ fun InputField(
 
         if (error != null) {
             Spacer(modifier = Modifier.height(4.dp))
-            Text(error, color = MaterialTheme.colorScheme.error)
+            Text(
+                error,
+                color = MaterialTheme.colorScheme.error,
+                fontSize = 12.sp,
+            )
         }
     }
 

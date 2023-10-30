@@ -1,4 +1,4 @@
-package com.codetron.schoolattendanceapp
+package com.codetron.schoolattendanceapp.screens
 
 import androidx.compose.runtime.Composable
 

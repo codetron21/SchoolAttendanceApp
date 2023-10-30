@@ -1,4 +1,4 @@
-package com.codetron.schoolattendanceapp
+package com.codetron.schoolattendanceapp.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -17,13 +17,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -37,23 +37,38 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.codetron.schoolattendanceapp.R
+import com.codetron.schoolattendanceapp.controller.LoginController
+import com.codetron.schoolattendanceapp.model.message.InputFieldMessage
+import com.codetron.schoolattendanceapp.model.validator.InputFieldValidator
 import com.codetron.schoolattendanceapp.ui.component.InputField
 import com.codetron.schoolattendanceapp.ui.theme.SchoolAttendanceAppTheme
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
-    var nisn by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var showPassword by remember { mutableStateOf(false) }
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    controller: LoginController = remember {
+        LoginController(fieldValidator = InputFieldValidator())
+    }
+) {
+
+    val state by controller.state.collectAsState()
+
+    val nisn = state.nisn
+    val password = state.password
+    val errNisn = state.errorNisn
+    val errPass = state.errorPass
+    val showPassword = state.showPassword
 
     val focusManager = LocalFocusManager.current
+    val context = LocalContext.current
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
-            .padding(dimensionResource(id = R.dimen.layout_padding))
             .verticalScroll(rememberScrollState())
+            .padding(dimensionResource(id = R.dimen.layout_padding))
     ) {
 
         Spacer(modifier = Modifier.weight(1F))
@@ -81,7 +96,8 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         InputField(
             value = nisn,
             label = stringResource(id = R.string.nisn),
-            onValueChange = { nisn = it },
+            error = InputFieldMessage.getFieldMessage(context, errNisn),
+            onValueChange = controller::onNisnChanged,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 autoCorrect = false,
@@ -100,7 +116,8 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         InputField(
             value = password,
             label = stringResource(id = R.string.password),
-            onValueChange = { password = it },
+            error = InputFieldMessage.getFieldMessage(context, errPass),
+            onValueChange = controller::onPasswordChanged,
             keyboardOptions = KeyboardOptions(
                 keyboardType = if (showPassword) KeyboardType.Text else KeyboardType.Password,
                 autoCorrect = false, imeAction = ImeAction.Done
@@ -118,7 +135,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                 tint = MaterialTheme.colorScheme.primary,
                 contentDescription = null,
                 modifier = Modifier.clickable {
-                    showPassword = !showPassword
+                    controller.onPasswordToggle()
                 }
             )
         }
@@ -137,7 +154,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = { },
+            onClick = controller::onLoginClicked,
             shape = RoundedCornerShape(4.dp),
             modifier = Modifier
                 .fillMaxWidth()
