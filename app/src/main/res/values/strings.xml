@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SchoolAttendanceApp</string>
+    <string name="app_title">School Attendance</string>
+    <string name="login">Login</string>
+    <string name="nisn">NISN</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+</resources>
