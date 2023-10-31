@@ -52,6 +52,7 @@ import com.codetron.schoolattendanceapp.services.LoginServices
 import com.codetron.schoolattendanceapp.services.message.MessageServices
 import com.codetron.schoolattendanceapp.services.message.ServiceTypeMessage
 import com.codetron.schoolattendanceapp.ui.component.InputField
+import com.codetron.schoolattendanceapp.ui.component.MyAlertDialog
 import com.codetron.schoolattendanceapp.ui.theme.SchoolAttendanceAppTheme
 
 @Composable
@@ -74,6 +75,7 @@ fun LoginScreen(
     val errPass = state.errorPass
     val showPassword = state.showPassword
     val loading = state.loading
+    val serviceMessage = state.serviceMessage
 
     val focusManager = LocalFocusManager.current
     val context = LocalContext.current
@@ -83,6 +85,7 @@ fun LoginScreen(
     LaunchedEffect(event) {
         when (event) {
             LoginEvent.Idle -> return@LaunchedEffect
+
             LoginEvent.NavToDashboard -> {
                 Toast.makeText(context, "login", Toast.LENGTH_SHORT).show()
             }
@@ -90,14 +93,21 @@ fun LoginScreen(
             LoginEvent.NavToForgotPassword -> {
                 navController.navigate("forgot-password")
             }
-
-            is LoginEvent.ShowServicesMessage -> {
-                val messageType = event.message
-                val message = MessageServices.getMessage(context, messageType)
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-            }
         }
         controller.cleanEvent()
+    }
+
+    if (serviceMessage != null) {
+        val message = MessageServices.getMessage(context, serviceMessage)
+
+        MyAlertDialog(
+            icon = painterResource(id = R.drawable.ic_info),
+            dialogTitle = stringResource(id = R.string.information),
+            dialogText = message.orEmpty(),
+            textConfirm = stringResource(id = R.string.ok),
+            onConfirmation = { controller.clearMessage() },
+            onDismissRequest = { controller.clearMessage() }
+        )
     }
 
     Box(

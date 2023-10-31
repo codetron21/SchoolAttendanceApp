@@ -46,6 +46,10 @@ class LoginController(
         _state.update { copy(event = LoginEvent.Idle) }
     }
 
+    fun clearMessage() {
+        _state.update { copy(serviceMessage = null) }
+    }
+
     fun onLoginClicked() {
         val nisn = _state.value.nisn
         val password = _state.value.password
@@ -74,7 +78,7 @@ class LoginController(
             errListener = { message ->
                 _state.update {
                     copy(
-                        event = LoginEvent.ShowServicesMessage(message = message!!),
+                        serviceMessage = message,
                         loading = false
                     )
                 }
