@@ -201,14 +201,20 @@ fun LoginScreen(
                 fontSize = 12.sp,
                 modifier = Modifier
                     .align(Alignment.End)
-                    .clickable(enabled = !loading) { controller.onForgotPasswordClicked() }
+                    .clickable(enabled = !loading) {
+                        focusManager.clearFocus()
+                        controller.onForgotPasswordClicked()
+                    }
                     .padding(4.dp)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = controller::onLoginClicked,
+                onClick = {
+                    focusManager.clearFocus()
+                    controller.onLoginClicked()
+                },
                 shape = RoundedCornerShape(4.dp),
                 enabled = !loading,
                 modifier = Modifier
@@ -231,7 +237,6 @@ fun LoginScreen(
             )
         }
     }
-
 
 }
 

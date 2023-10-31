@@ -13,5 +13,6 @@
     <string name="err_account_not_registered">Your account is not registered, please contact your teacher.</string>
     <string name="err_password_incorrect">Your password is incorrect.</string>
     <string name="information">Information</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
+    <string name="copy_value">Successfully copy of %s</string>
 </resources>
