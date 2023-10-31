@@ -41,7 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.codetron.schoolattendanceapp.R
 import com.codetron.schoolattendanceapp.controller.LoginController
@@ -50,7 +50,6 @@ import com.codetron.schoolattendanceapp.model.message.InputFieldMessage
 import com.codetron.schoolattendanceapp.model.validator.InputFieldValidator
 import com.codetron.schoolattendanceapp.services.LoginServices
 import com.codetron.schoolattendanceapp.services.message.MessageServices
-import com.codetron.schoolattendanceapp.services.message.ServiceTypeMessage
 import com.codetron.schoolattendanceapp.ui.component.InputField
 import com.codetron.schoolattendanceapp.ui.component.MyAlertDialog
 import com.codetron.schoolattendanceapp.ui.theme.SchoolAttendanceAppTheme
@@ -64,7 +63,7 @@ fun LoginScreen(
             services = LoginServices()
         )
     },
-    navController: NavController = rememberNavController()
+    navController: NavHostController = rememberNavController()
 ) {
 
     val state by controller.state.collectAsState()

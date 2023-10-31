@@ -54,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.codetron.schoolattendanceapp.R
 import com.codetron.schoolattendanceapp.controller.ForgotPasswordController
@@ -67,7 +68,6 @@ import com.codetron.schoolattendanceapp.ui.component.MyAlertDialog
 import com.codetron.schoolattendanceapp.ui.component.MyClickableDialog
 import com.codetron.schoolattendanceapp.ui.theme.SchoolAttendanceAppTheme
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ForgotPasswordScreen(
     modifier: Modifier = Modifier,
@@ -77,7 +77,7 @@ fun ForgotPasswordScreen(
             services = ForgotPasswordServices()
         )
     },
-    navController: NavController = rememberNavController()
+    navController: NavHostController = rememberNavController()
 ) {
     val state by controller.state.collectAsState()
 
