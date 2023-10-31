@@ -1,6 +1,5 @@
 package com.codetron.schoolattendanceapp.services
 
-import androidx.compose.animation.core.snap
 import com.codetron.schoolattendanceapp.services.config.FirebaseConfig
 import com.codetron.schoolattendanceapp.services.message.ServiceTypeMessage
 import com.codetron.schoolattendanceapp.services.model.Student

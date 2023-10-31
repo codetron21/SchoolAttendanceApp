@@ -1,7 +1,6 @@
 package com.codetron.schoolattendanceapp.controller
 
 import com.codetron.schoolattendanceapp.event.ForgotPasswordEvent
-import com.codetron.schoolattendanceapp.event.LoginEvent
 import com.codetron.schoolattendanceapp.helper.update
 import com.codetron.schoolattendanceapp.model.validator.InputFieldValidator
 import com.codetron.schoolattendanceapp.services.ForgotPasswordServices

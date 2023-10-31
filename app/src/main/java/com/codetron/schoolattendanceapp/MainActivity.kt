@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.codetron.schoolattendanceapp.screens.DashboardScreen
 import com.codetron.schoolattendanceapp.screens.ForgotPasswordScreen
 import com.codetron.schoolattendanceapp.screens.LoginScreen
 import com.codetron.schoolattendanceapp.ui.theme.SchoolAttendanceAppTheme
@@ -24,6 +25,10 @@ class MainActivity : ComponentActivity() {
 
                     composable("forgot-password") {
                         ForgotPasswordScreen(navController=navController)
+                    }
+
+                    composable("dashboard") {
+                        DashboardScreen(navController=navController)
                     }
                 }
             }
