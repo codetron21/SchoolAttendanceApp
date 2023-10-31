@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "596482416516",
+    "project_id": "school-attendance-4affe",
+    "storage_bucket": "school-attendance-4affe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596482416516:android:0fdc9680795ddda6b187d1",
+        "android_client_info": {
+          "package_name": "com.codetron.schoolattendanceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl2EBCIeD9d8xHGvWsuEGpmf2DmEb8nTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

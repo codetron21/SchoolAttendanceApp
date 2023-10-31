@@ -1,5 +1,7 @@
 package com.codetron.schoolattendanceapp.controller
 
+import com.codetron.schoolattendanceapp.event.ForgotPasswordEvent
+import com.codetron.schoolattendanceapp.event.LoginEvent
 import com.codetron.schoolattendanceapp.helper.update
 import com.codetron.schoolattendanceapp.model.validator.InputFieldValidator
 import com.codetron.schoolattendanceapp.state.ForgotPasswordState
@@ -21,8 +23,22 @@ class ForgotPasswordController(
         }
     }
 
-    fun onSubmitClicked() {
+    fun onBackClicked() {
+        _state.update { copy(event = ForgotPasswordEvent.NavBack) }
+    }
 
+    fun cleanEvent() {
+        _state.update { copy(event = ForgotPasswordEvent.Idle) }
+    }
+
+    fun onSubmitClicked() {
+        val nisn = _state.value.nisn
+
+        onNisnChanged(nisn)
+
+        val errNisn = _state.value.errorNisn
+
+        if (errNisn != null) return
     }
 
 }

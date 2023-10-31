@@ -1,13 +1,16 @@
 package com.codetron.schoolattendanceapp.controller
 
+import com.codetron.schoolattendanceapp.event.LoginEvent
 import com.codetron.schoolattendanceapp.helper.update
 import com.codetron.schoolattendanceapp.model.validator.InputFieldValidator
+import com.codetron.schoolattendanceapp.services.LoginServices
 import com.codetron.schoolattendanceapp.state.LoginState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class LoginController(
-    private val fieldValidator: InputFieldValidator
+    private val fieldValidator: InputFieldValidator,
+    private val services: LoginServices,
 ) {
 
     private val _state = MutableStateFlow(LoginState())
@@ -35,6 +38,14 @@ class LoginController(
         }
     }
 
+    fun onForgotPasswordClicked() {
+        _state.update { copy(event = LoginEvent.NavToForgotPassword) }
+    }
+
+    fun cleanEvent() {
+        _state.update { copy(event = LoginEvent.Idle) }
+    }
+
     fun onLoginClicked() {
         val nisn = _state.value.nisn
         val password = _state.value.password
@@ -47,11 +58,28 @@ class LoginController(
 
         if (errNisn != null || errPass != null) return
 
+        _state.update { copy(loading = true) }
 
-    }
-
-    fun onForgotPasswordClicked() {
-
+        services.login(
+            nisn = nisn,
+            password = password,
+            successListener = {
+                _state.update {
+                    copy(
+                        event = LoginEvent.NavToDashboard,
+                        loading = false
+                    )
+                }
+            },
+            errListener = { message ->
+                _state.update {
+                    copy(
+                        event = LoginEvent.ShowServicesMessage(message = message!!),
+                        loading = false
+                    )
+                }
+            }
+        )
     }
 
 }

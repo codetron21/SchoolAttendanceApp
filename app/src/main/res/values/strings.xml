@@ -2,9 +2,14 @@
     <string name="app_name">SchoolAttendanceApp</string>
     <string name="app_title">School Attendance</string>
     <string name="login">Login</string>
+    <string name="submit">Submit</string>
     <string name="nisn">NISN</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="nisn_empty">NISN can\'t be empty.</string>
     <string name="pass_empty">Password can\'t be empty.</string>
+
+    <string name="err_general">An error occurred, please make sure your internet connection is active.</string>
+    <string name="err_account_not_registered">Your account is not registered, please contact your teacher.</string>
+    <string name="err_password_incorrect">Your password is incorrect.</string>
 </resources>

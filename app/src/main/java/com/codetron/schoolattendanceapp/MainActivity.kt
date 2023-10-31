@@ -19,11 +19,11 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(navController = navController, startDestination = "login") {
                     composable("login") {
-                        LoginScreen()
+                        LoginScreen(navController=navController)
                     }
 
                     composable("forgot-password") {
-                        ForgotPasswordScreen()
+                        ForgotPasswordScreen(navController=navController)
                     }
                 }
             }
